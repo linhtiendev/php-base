@@ -1,0 +1,1 @@
+<!-- chứa hàm liên quan đến xử lý db -->

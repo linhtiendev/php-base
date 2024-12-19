@@ -1,0 +1,1 @@
+<!-- hàm liên quan đến session và cookie -->

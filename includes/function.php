@@ -1,0 +1,1 @@
+<!-- chứa function dùng chung  -->
