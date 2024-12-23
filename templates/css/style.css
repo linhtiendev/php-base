@@ -1,0 +1,25 @@
+:root {
+  --primary-color: #896262;
+  --secondary-color: #a47171;
+  --text-color: #333333;
+  --background-color: #f9f9f9;
+}
+
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+.primary_btn_custom {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+.primary_btn_custom:hover {
+  background-color: var(--secondary-color);
+}
+

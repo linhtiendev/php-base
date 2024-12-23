@@ -1,0 +1,13 @@
+.form__label {
+    font-size: 16px;
+    color: #896262;
+    /* color: red; */
+}
+
+.form-group {
+    margin: 10px 10px;
+}
+
+.submit__btn {
+    margin: 10px;
+}
