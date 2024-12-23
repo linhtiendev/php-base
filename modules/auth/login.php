@@ -3,7 +3,11 @@ if (!defined('_CODE')) {
     die('Access denied...');
 }
 
-layouts('header');
+$dataPageTitle = [
+    'pageTitle' => 'Đăng nhập tài khoản'
+];
+
+layouts('header', $dataPageTitle);
 
 // Thêm file CSS cho login
 addCss('auth/login')
@@ -24,7 +28,7 @@ addCss('auth/login')
             <button type="submit" class="primary_btn_custom submit__btn btn btn-primary btn-block">Đăng nhập</button>
             <hr />
             <div class="d-flex justify-content-between">
-                <p class="text-center"><a href="?module=auth&action=register" class="text-dark text-decoration-none">Đăng kí</a></p>
+                <p class="text-center"><a href="?module=auth&action=register" class="text-dark text-decoration-none">Đăng ký</a></p>
                 <p class="text-center"><a href="?module=auth&action=forgot_password" class="text-dark text-decoration-none">Quên mật khẩu</a></p>
             </div>
         </form>

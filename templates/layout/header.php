@@ -10,7 +10,7 @@ if (!defined('_CODE')) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quản lý người dùng</title>
+    <title><?php echo !empty($dataPageTitle['pageTitle']) ? $dataPageTitle['pageTitle'] : 'Quản lý người dùng' ?></title>
     <link rel="stylesheet" href="<?php echo _WEB_HOST_TEMPLATES ?>/css/bootstrap.min.css">
     <link rel="stylesheet" href="<?php echo _WEB_HOST_TEMPLATES ?>/css/style.css">
     <!-- font awesome 6.4.2 -->

@@ -3,7 +3,11 @@ if (!defined('_CODE')) {
     die('Access denied...');
 }
 
-layouts('header');
+$dataPageTitle = [
+    'pageTitle' => 'Đăng ký tài khoản'
+];
+
+layouts('header', $dataPageTitle);
 
 // Thêm file CSS cho login
 addCss('auth/login')

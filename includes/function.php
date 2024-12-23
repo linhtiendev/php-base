@@ -7,8 +7,8 @@ if (!defined('_CODE')) {
     die('Access denied...');
 };
 
-// tạo biến layout để truyền
-function layouts($layoutName = 'header')
+// tạo biến layout để truyền layout và title
+function layouts($layoutName = 'header', $dataPageTitle = [])
 {
     if (file_exists(_WEB_PATH_TEMPLATES . '/layout/' . $layoutName . '.php')) {
         require_once _WEB_PATH_TEMPLATES . '/layout/' . $layoutName . '.php';
