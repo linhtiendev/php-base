@@ -2,9 +2,11 @@
 <?php
 // khởi tạo session
 session_start();
-
 // gọi file config
 require_once('config.php');
+
+// kiểm tra biến code trong từng thư mục
+// echo _CODE; // kiểm tra có chạy đúng đường dẫn
 
 $module = _MODULE;
 $action = _ACTION;
