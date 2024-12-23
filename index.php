@@ -1,14 +1,8 @@
 <!-- file chính -->
 <?php
-// khởi tạo session
-session_start();
-// gọi file config
-require_once('config.php');
-
-echo '<i class="fa-solid fa-house"></i>';
-
-// kiểm tra biến code trong từng thư mục
-// echo _CODE; // kiểm tra có chạy đúng đường dẫn
+session_start(); // khởi tạo session
+require_once('config.php'); // gọi file config
+require_once('./includes/function.php'); //nhúng cấu hình các hàm dùng chung
 
 $module = _MODULE;
 $action = _ACTION;
