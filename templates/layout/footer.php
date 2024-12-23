@@ -5,5 +5,5 @@ if (!defined('_CODE')) {
 ?>
 <h1>footer</h1>
 
-<script src="template/js/bootstrap.min.js"></script>
-<script src="template/js/custom.js"></script>
+<script src="<?php echo _WEB_HOST_TEMPLATES ?>/js/bootstrap.min.js"></script>
+<script src="<?php echo _WEB_HOST_TEMPLATES ?>/js/custom.js"></script>

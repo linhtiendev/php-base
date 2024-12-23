@@ -5,6 +5,8 @@ session_start();
 // gọi file config
 require_once('config.php');
 
+echo '<i class="fa-solid fa-house"></i>';
+
 // kiểm tra biến code trong từng thư mục
 // echo _CODE; // kiểm tra có chạy đúng đường dẫn
 
