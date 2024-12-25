@@ -4,8 +4,6 @@ if (!defined('_CODE')) {
     die('Access denied...');
 };
 
-require_once './management_user/config.php';
-
 // Tạo đối tượng $conn (kết nối cơ sở dữ liệu) để các file khác sử dụng.
 try {
     // Thiết lập kết nối PDO

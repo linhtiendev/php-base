@@ -2,7 +2,9 @@
 <?php
 session_start(); // khởi tạo session
 require_once('config.php'); // gọi file config
+require_once('./includes/connect.php');
 require_once('./includes/function.php'); //nhúng cấu hình các hàm dùng chung
+require_once('./includes/database.php');
 
 $module = _MODULE;
 $action = _ACTION;

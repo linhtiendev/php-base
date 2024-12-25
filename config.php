@@ -18,6 +18,6 @@ define('_WEB_PATH_TEMPLATES', _WEB_PATH . '/templates');
 
 // thông tin kết nối
 const _HOST = 'localhost';
-const _DB = 'managemement_user';
+const _DB = 'management_user';
 const _USER = 'root';
 const _PASS = '';

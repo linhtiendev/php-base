@@ -3,6 +3,14 @@ if (!defined('_CODE')) {
     die('Access denied...');
 }
 
+$data = [
+    'fullname' => 'Linh Tiến',
+    'email' => 'lelinhtien123@gmail.com',
+    'phone' => '040405450'
+];
+
+insert('users', $data);
+
 $dataPageTitle = [
     'pageTitle' => 'Đăng ký tài khoản'
 ];

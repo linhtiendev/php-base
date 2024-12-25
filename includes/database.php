@@ -26,3 +26,19 @@ function query($sql, $data = [])
     }
     return $result;
 }
+
+// hàm insert vào data
+function insert($table, $data)
+{
+    // lấy key trong data, $data = ['fullname' => 'John Doe', 'age' => 25];
+    $key = array_keys($data); // Kết quả: ['fullname', 'age']
+    // dùng hàm implode để nối phần tử của mảng thành một chuỗi 
+    $field = implode(',', $key); // Chuỗi các tên cột, cách nhau bởi dấu phẩy ,
+    $valuetb = ':' . implode(',:', $key);
+
+    // tạo biến truyền hàm query để thao tác với db
+    $sql = 'INSERT INTO ' . $table . '(' . $field . ')' . 'VALUES(' . $valuetb . ')';
+    // truy vấn sẽ có dạng INSERT INTO student (fullname, age) VALUES (:fullname, :age)
+    $kq = query($sql, $data); //truy vấn và trả ra kết quả
+    return $kq;
+}
