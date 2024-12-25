@@ -15,3 +15,9 @@ define('_WEB_HOST_TEMPLATES', _WEB_HOST . '/templates');
 // hằng số __DIR__ giúp xác định path
 define('_WEB_PATH', __DIR__); // \xampp\htdocs\management_user
 define('_WEB_PATH_TEMPLATES', _WEB_PATH . '/templates');
+
+// thông tin kết nối
+const _HOST = 'localhost';
+const _DB = 'managemement_user';
+const _USER = 'root';
+const _PASS = '';
