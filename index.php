@@ -3,18 +3,25 @@
 session_start(); // khởi tạo session
 require_once('config.php'); // gọi file config
 require_once('./includes/connect.php');
-require_once('./includes/function.php'); //nhúng cấu hình các hàm dùng chung
+
+// thư viện phpmailer
+require_once('./includes/phpmailer/Exception.php');
+require_once('./includes/phpmailer/PHPMailer.php');
+require_once('./includes/phpmailer/SMTP.php');
+
+//nhúng cấu hình các hàm dùng chung
+require_once('./includes/function.php');
 require_once('./includes/database.php');
 require_once('./includes/session.php');
 
-// $session_test = setSession('liti', 'gia tri cua session');
-// var_dump($session_test);
-// removeSession('liti');
-// echo getSession('liti');
 // setFlashData('msg', 'finished');
-echo getFlashData('msg');
+// echo getFlashData('msg');
 
-
+// $subjectEmail = 'Liti xin chao';
+// $contentEmail = 'day la noi dung';
+$subjectEmail =
+    $contentEmail =
+    sendMail('lelinhtien0707@gmail.com', $subjectEmail, $contentEmail);
 
 $module = _MODULE;
 $action = _ACTION;

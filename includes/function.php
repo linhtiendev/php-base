@@ -7,6 +7,10 @@ if (!defined('_CODE')) {
     die('Access denied...');
 };
 
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
 // tạo biến layout để truyền layout và title
 function layouts($layoutName = 'header', $dataPageTitle = [])
 {
@@ -30,5 +34,40 @@ function addCss($cssFiles = [])
                 echo '<link rel="stylesheet" href="' . _WEB_HOST_TEMPLATES . '/css/' . $cssFile . '.css">';
             }
         }
+    }
+}
+
+// hàm gửi mail
+function sendMail($to, $subject, $content)
+{
+
+    //Create an instance; passing `true` enables exceptions
+    $mail = new PHPMailer(true);
+
+    try {
+        //Server settings
+        $mail->SMTPDebug = SMTP::DEBUG_OFF;                      //Enable verbose debug output
+        $mail->isSMTP();                                            //Send using SMTP
+        $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
+        $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+        // dùng email được tạo mật khẩu ứng dụng ở đây
+        $mail->Username   = 'lelinhtien102@gmail.com';                     //SMTP username
+        $mail->Password   = 'sqtxbdvmqqrkeyxd';                               //SMTP password
+        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;            //Enable implicit TLS encryption
+        $mail->Port       = 465;                                    //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+
+        //Recipients
+        $mail->setFrom('lelinhtien0707@gmail.com', 'Linh Tien'); // email người nhận
+        $mail->addAddress($to);     //Add a recipient
+
+        //Content
+        $mail->isHTML(true);                                  //Set email format to HTML
+        $mail->Subject = $subject;
+        $mail->Body    = $content;
+
+        $mail->send();
+        echo 'Gửi thành công';
+    } catch (Exception $e) {
+        echo "Gửi mail không thành công. Mailer Error: {$mail->ErrorInfo}";
     }
 }
