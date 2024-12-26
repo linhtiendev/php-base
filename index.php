@@ -5,6 +5,16 @@ require_once('config.php'); // gọi file config
 require_once('./includes/connect.php');
 require_once('./includes/function.php'); //nhúng cấu hình các hàm dùng chung
 require_once('./includes/database.php');
+require_once('./includes/session.php');
+
+// $session_test = setSession('liti', 'gia tri cua session');
+// var_dump($session_test);
+// removeSession('liti');
+// echo getSession('liti');
+// setFlashData('msg', 'finished');
+echo getFlashData('msg');
+
+
 
 $module = _MODULE;
 $action = _ACTION;
