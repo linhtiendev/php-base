@@ -10,7 +10,18 @@ $dataPageTitle = [
 layouts('header', $dataPageTitle);
 
 // Thêm file CSS cho login
-addCss('auth/login')
+addCss('auth/login');
+
+$kq = filter();
+echo '<pre>';
+print_r($kq);
+echo '</pre>';
+// Array
+// (
+//     [email] => example@gmail.com
+//     [password] => 12312312
+// )
+
 ?>
 
 <div class="row">
@@ -19,11 +30,11 @@ addCss('auth/login')
         <form action="" method="post">
             <div class="form-group">
                 <label for="title" class="form__label">Email</label>
-                <input type="email" class="form-control form__input" placeholder="Nhập email" />
+                <input name="email" type="email" class="form-control form__input" placeholder="Nhập email" />
             </div>
             <div class="form-group">
-                <label for="title" class="form__label">Password</label>
-                <input type="password" class="form-control form__input" placeholder="Nhập mật khẩu" />
+                <label for="" class="form__label">Password</label>
+                <input name="password" type="password" class="form-control form__input" placeholder="Nhập mật khẩu" />
             </div>
             <button type="submit" class="primary_btn_custom submit__btn btn btn-primary btn-block">Đăng nhập</button>
             <hr />

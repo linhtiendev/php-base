@@ -71,3 +71,59 @@ function sendMail($to, $subject, $content)
         echo "Gửi mail không thành công. Mailer Error: {$mail->ErrorInfo}";
     }
 }
+
+// Kiểm tra phương thức GET
+function isGet()
+{
+    if ($_SERVER['REQUEST_METHOD'] == 'GET') {
+        return true;
+    }
+    return false;
+}
+
+// Kiểm tra phương thức POST
+function isPost()
+{
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        return true;
+    }
+    return false;
+}
+
+// hàm filter lọc dữ liệu
+function filter()
+{
+    $filterArr = [];
+    if (isGet()) {
+        // xử lí dữ liệu trước khi hiển thị
+        if (!empty($_GET)) {
+            foreach ($_GET as $key => $value) {
+                // lọc trường hợp value là một mảng
+                $key = strip_tags($key); //Loại bỏ thẻ HTML trong key bằng strip_tags()
+                if (is_array($value)) {
+                    //  filter_input() với FILTER_SANITIZE_SPECIAL_CHARS để lọc ký tự đặc biệt, bảo vệ khỏi XSS.
+                    // Nếu giá trị là một mảng, sử dụng FILTER_REQUIRE_ARRAY để xử lý tất cả các phần tử.
+                    $filterArr[$key] = filter_input(INPUT_GET, $key, FILTER_SANITIZE_SPECIAL_CHARS, FILTER_REQUIRE_ARRAY);
+                } else {
+                    $filterArr[$key] = filter_input(INPUT_GET, $key, FILTER_SANITIZE_SPECIAL_CHARS);
+                }
+                // mã hóa dữ liệu đầu vào
+            }
+        }
+    }
+
+    if (isPost()) {
+        if (!empty($_POST)) {
+            foreach ($_POST as $key => $value) {
+                if (is_array($value)) {
+                    $filterArr[$key] = filter_input(INPUT_POST, $key, FILTER_SANITIZE_SPECIAL_CHARS, FILTER_REQUIRE_ARRAY);
+                } else {
+                    $filterArr[$key] = filter_input(INPUT_POST, $key, FILTER_SANITIZE_SPECIAL_CHARS);
+                }
+                // mã hóa dữ liệu đầu vào
+
+            }
+        }
+    }
+    return $filterArr;
+}

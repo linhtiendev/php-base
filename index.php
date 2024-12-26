@@ -19,9 +19,9 @@ require_once('./includes/session.php');
 
 // $subjectEmail = 'Liti xin chao';
 // $contentEmail = 'day la noi dung';
-$subjectEmail =
-    $contentEmail =
-    sendMail('lelinhtien0707@gmail.com', $subjectEmail, $contentEmail);
+// $subjectEmail =
+//     $contentEmail =
+//     sendMail('lelinhtien0707@gmail.com', $subjectEmail, $contentEmail);
 
 $module = _MODULE;
 $action = _ACTION;
