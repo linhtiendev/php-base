@@ -8,8 +8,13 @@ if (!defined('_CODE')) {
 //     'email' => 'lepain223@gmail.com',
 //     'phone' => '50330303',
 // ];
-$kq = delete('users', 'id = 2');
-var_dump($kq);
+// $kq = getRaw('SELECT * FROM users ');
+// $kq = oneRaw('SELECT * FROM users ');
+$kq = getRaws('SELECT * FROM users ');
+
+echo '<pre>';
+print_r($kq);
+echo '</pre>';
 
 $dataPageTitle = [
     'pageTitle' => 'Đăng ký tài khoản'

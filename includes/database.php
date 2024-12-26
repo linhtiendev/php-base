@@ -5,7 +5,7 @@ if (!defined('_CODE')) {
 };
 
 // hàm query thao tác trực tiếp với db
-function query($sql, $data = [])
+function query($sql, $data = [], $check = false)
 {
     global $conn;
     $result = false;
@@ -23,6 +23,9 @@ function query($sql, $data = [])
         echo 'File: ' . $exp->getFile() . '<br >';
         echo 'Line: ' . $exp->getLine();
         die();
+    }
+    if ($check) {
+        return $statement;
     }
     return $result;
 }
@@ -75,4 +78,35 @@ function delete($table, $condition = '')
     }
     $kq = query($sql);
     return $kq;
+}
+
+// select data
+// lấy nhiều dòng dữ liệu
+function getRaw($sql)
+{
+    $result = query($sql, '', true);
+    if (is_object($result)) {
+        $dataFetch = $result->fetchAll(PDO::FETCH_ASSOC);
+    }
+    return $dataFetch;
+}
+
+// lấy một dòng dữ liệu
+function oneRaw($sql)
+{
+    $result = query($sql, '', true);
+    if (is_object($result)) {
+        $dataFetch = $result->fetch(PDO::FETCH_ASSOC);
+    }
+    return $dataFetch;
+}
+
+// đếm số dòng dữ liệu
+function getRaws($sql)
+{
+    $result = query($sql, '', true);
+    if (!empty($result)) {
+
+        return $result->rowCount();
+    }
 }
