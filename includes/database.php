@@ -63,3 +63,16 @@ function update($table, $data, $condition = '')
     return $kq;
     // UPDATE users SET fullname = :fullname, email = :email, phone = :phone WHERE id = 2
 }
+
+// hàm delete
+function delete($table, $condition = '')
+{
+    if (empty($condition)) {
+        die('Error: Condition is required to delete data.');
+        // $sql = 'DELETE FROM ' . $table;
+    } else {
+        $sql = 'DELETE FROM ' . $table . ' WHERE ' . $condition;
+    }
+    $kq = query($sql);
+    return $kq;
+}

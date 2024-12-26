@@ -3,12 +3,12 @@ if (!defined('_CODE')) {
     die('Access denied...');
 }
 
-$data = [
-    'fullname' => 'The Linh Tien',
-    'email' => 'lepain223@gmail.com',
-    'phone' => '50330303',
-];
-$kq = update('users', $data, 'id = 2');
+// $data = [
+//     'fullname' => 'The Linh Tien',
+//     'email' => 'lepain223@gmail.com',
+//     'phone' => '50330303',
+// ];
+$kq = delete('users', 'id = 2');
 var_dump($kq);
 
 $dataPageTitle = [
