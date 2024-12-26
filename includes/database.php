@@ -42,3 +42,24 @@ function insert($table, $data)
     $kq = query($sql, $data); //truy vấn và trả ra kết quả
     return $kq;
 }
+
+// hàm update data
+// $condition là biến điều kiện để sửa
+function update($table, $data, $condition = '')
+{
+    $update = '';
+    foreach ($data as $key => $value) {
+        $update .= $key . '= :' . $key . ',';
+    }
+    // xóa dấu , ở cuối chuỗi để câu truy vấn SQL hợp lệ.
+    $update = trim($update, ',');
+    // kết quả: $update = "fullname = :fullname, email = :email, phone = :phone";
+    if (!empty($condition)) {
+        $sql = 'UPDATE ' . $table . ' SET ' . $update . ' WHERE ' . $condition;
+    } else {
+        $sql = 'UPDATE ' . $table . ' SET ' . $update;
+    }
+    $kq = query($sql, $data);
+    return $kq;
+    // UPDATE users SET fullname = :fullname, email = :email, phone = :phone WHERE id = 2
+}

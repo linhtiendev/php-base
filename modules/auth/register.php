@@ -4,12 +4,12 @@ if (!defined('_CODE')) {
 }
 
 $data = [
-    'fullname' => 'Linh Tiến',
-    'email' => 'lelinhtien123@gmail.com',
-    'phone' => '040405450'
+    'fullname' => 'The Linh Tien',
+    'email' => 'lepain223@gmail.com',
+    'phone' => '50330303',
 ];
-
-insert('users', $data);
+$kq = update('users', $data, 'id = 2');
+var_dump($kq);
 
 $dataPageTitle = [
     'pageTitle' => 'Đăng ký tài khoản'
