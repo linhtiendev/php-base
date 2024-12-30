@@ -102,7 +102,7 @@ function oneRaw($sql)
 }
 
 // đếm số dòng dữ liệu
-function getRaws($sql)
+function getRows($sql)
 {
     $result = query($sql, '', true);
     if (!empty($result)) {
