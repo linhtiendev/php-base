@@ -127,3 +127,24 @@ function filter()
     }
     return $filterArr;
 }
+
+// hàm kiểm tra email
+function isEmail($email)
+{
+    $checkEmail = filter_var($email, FILTER_VALIDATE_EMAIL);
+    return $checkEmail;
+}
+
+// hàm kiểm tra số nguyên
+function isNumberInt($number)
+{
+    $checkNumber = filter_var($number, FILTER_VALIDATE_INT);
+    return $checkNumber;
+}
+
+// hàm kiểm tra số thực
+function isNumberFloat($number)
+{
+    $checkNumber = filter_var($number, FILTER_VALIDATE_FLOAT);
+    return $checkNumber;
+}

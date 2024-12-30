@@ -12,15 +12,9 @@ layouts('header', $dataPageTitle);
 // Thêm file CSS cho login
 addCss('auth/login');
 
-$kq = filter();
-echo '<pre>';
-print_r($kq);
-echo '</pre>';
-// Array
-// (
-//     [email] => example@gmail.com
-//     [password] => 12312312
-// )
+$check = isNumberInt(2);
+$check = isNumberFloat(2.2);
+var_dump($check);
 
 ?>
 
