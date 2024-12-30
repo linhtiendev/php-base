@@ -12,9 +12,18 @@ layouts('header', $dataPageTitle);
 // Thêm file CSS cho login
 addCss('auth/login');
 
-$check = isNumberInt(2);
-$check = isNumberFloat(2.2);
-var_dump($check);
+// $check = isNumberInt(2);
+// $check = isNumberFloat(2.2);
+// var_dump($check);
+
+$password = '123456';
+
+// hàm mã hóa mật khẩu
+// PASSWORD_DEFAULT: mã hóa mặc định bcrypt
+$hashPassword = password_hash($password, PASSWORD_DEFAULT);
+// So sánh mật khẩu đã nhập '123456' với chuỗi băm $hashPassword bằng password_verify.
+$checkPass = password_verify('123456', $hashPassword);
+var_dump($checkPass)
 
 ?>
 
