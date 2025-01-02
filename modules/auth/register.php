@@ -59,10 +59,46 @@ if (isPost()) {
         }
     }
     if (empty($errors)) {
-        // gọi session flashdata
-        setFlashData('smg', 'Đăng ký thành công!');
-        setFlashData('smg_type', 'success');
-        // redirect('?module=auth&action=login');
+        // insert dữ liệu vào db
+        // tạo ra token
+        $activeToken = sha1(uniqid() . time());
+        $dataInsert = [
+            'fullname' => $filterAll['fullname'],
+            'email' => $filterAll['email'],
+            'phone' => $filterAll['phone'],
+            'password' => password_hash($filterAll['password'], PASSWORD_DEFAULT),
+            'activeToken' => $activeToken,
+            'create_at' => date('Y-m-d H:i:s')
+        ];
+        // insert dataInsert vào db
+        $insertStatus = insert('users', $dataInsert);
+        if ($insertStatus) {
+            // tạo link kích hoạt
+            $linkActive = _WEB_HOST . '?module=auth&action=active&token=' . $activeToken;
+
+            // Thiết lập gửi mail
+            $subject = 'Vui lòng kích hoạt tài khoản cho ' . $filterAll['fullname']; // tiêu đề
+            $content = 'Chào ' . $filterAll['fullname'] . '.</br>';
+            $content .= ' Vui lòng click vào link dưới đây để kích hoạt tài khoản: </br>';
+            $content .= $linkActive . '.</br>';
+            $content .= 'Xin cảm ơn!';
+
+            // Tiến hành gửi mail
+            $sendMail = sendMail($filterAll['email'], $subject, $content);
+
+            if ($sendMail) {
+                setFlashData('smg', 'Đăng ký thành công, vui lòng kiểm tra email để kích hoạt tài khoản');
+                setFlashData('smg_type', 'success');
+            } else {
+                setFlashData('smg', 'Hệ thống đang gặp sự cố, vui lòng thử lại sau!');
+                setFlashData('smg_type', 'danger');
+            }
+        } else {
+            setFlashData('smg', 'Đăng kí không thành công!');
+            setFlashData('smg_type', 'danger');
+        }
+
+        redirect('?module=auth&action=register');
     } else {
         // gọi session flashdata
         setFlashData('smg', 'Vui lòng kiểm tra lại dữ liệu!');
