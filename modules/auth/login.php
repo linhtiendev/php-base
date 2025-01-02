@@ -3,33 +3,85 @@ if (!defined('_CODE')) {
     die('Access denied...');
 }
 
-$dataPageTitle = [
-    'pageTitle' => 'Đăng nhập tài khoản'
-];
-
+$dataPageTitle = ['pageTitle' => 'Đăng nhập tài khoản'];
 layouts('header', $dataPageTitle);
-
-// Thêm file CSS cho login
 addCss('auth/login');
 
-// $check = isNumberInt(2);
-// $check = isNumberFloat(2.2);
-// var_dump($check);
+// kiểm tra trang thái đăng nhập, nếu đã đăng nhập và có token sẽ điều hướng về dashboard
+if (isLogin()) {
+    redirect('?module=home&action=dashboard');
+}
 
-$password = '123456';
+// kiểm tra phương thức post
+if (isPost()) {
+    $filterAll = filter();
 
-// hàm mã hóa mật khẩu
-// PASSWORD_DEFAULT: mã hóa mặc định bcrypt
-$hashPassword = password_hash($password, PASSWORD_DEFAULT);
-// So sánh mật khẩu đã nhập '123456' với chuỗi băm $hashPassword bằng password_verify.
-$checkPass = password_verify('123456', $hashPassword);
-var_dump($checkPass)
+    // check rỗng cho input
+    if (!empty(trim($filterAll['email'])) && !empty(trim($filterAll['password']))) {
+        // kiểm tra đăng nhập
+        $email = $filterAll['email'];
+        $password = $filterAll['password'];
+
+        // truy vấn thông tin users theo email
+        $userQuery = oneRaw("SELECT password, id FROM users WHERE email = '$email'");
+
+        if (!empty($userQuery)) {
+            // lấy password được hash trong db ra
+            $passwordHash = $userQuery['password'];
+            // lấy id trong db ra
+            $userId = $userQuery['id'];
+
+            // so sánh password được nhập trong input và password được hash trong db 
+            if (password_verify($password, $passwordHash)) {
+                // token login check user có đang đăng nhập
+                // tạo token login
+                $tokenLogin = sha1(uniqid() . time());
+
+                // lấy dl để insert vào bảng login token
+                $dataInsert = [
+                    'user_id' => $userId,
+                    'token' => $tokenLogin,
+                    'create_at' => date('Y-m-d H:i:s'),
+                ];
+                // insert dataInsert vào bảng logintoken
+                $insertStatus = insert('logintoken', $dataInsert);
+                if ($insertStatus) {
+                    // insert thành công
+                    // lưu login token vào session
+                    setSession('logintoken', $tokenLogin);
+                    redirect('?module=home&action=dashboard');
+                } else {
+                    setFlashData('msg', 'Không thể đăng nhập, vui lòng thử lại sau');
+                    setFlashData('msg_type', 'danger');
+                }
+            } else {
+                setFlashData('msg', 'Mật khẩu không chính xác');
+                setFlashData('msg_type', 'danger');
+            }
+        } else {
+            setFlashData('msg', 'Email không tồn tại');
+            setFlashData('msg_type', 'danger');
+        }
+    } else {
+        setFlashData('msg', 'Vui lòng nhập email và mật khẩu');
+        setFlashData('msg_type', 'danger');
+    }
+    redirect('?module=auth&action=login');
+}
+
+$msg = getFlashData('msg');
+$msg_type = getFlashData('msg_type');
 
 ?>
 
 <div class="row">
     <div class="col-6" style="margin: 50px auto;">
         <h2 class="text-center">Đăng Nhập</h2>
+        <?php
+        if (!empty($msg)) {
+            getSmg($msg, $msg_type);
+        }
+        ?>
         <form action="" method="post">
             <div class="form-group">
                 <label for="title" class="form__label">Email</label>

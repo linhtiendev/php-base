@@ -212,3 +212,23 @@ function oldData($fileName, $old_data = '', $default = null)
 {
     return (!empty($old_data[$fileName])) ? $old_data[$fileName] : $default;
 }
+
+// Hàm kiểm tra trạng thái đăng nhập
+function isLogin()
+{
+    $checkLogin = false;
+    // lấy logintoken từ session
+    if (getSession('logintoken')) {
+        $tokenLogin = getSession('logintoken');
+
+        // kiểm tra token có tồn tại với db
+        $queryToken = oneRaw("SELECT user_id FROM logintoken WHERE token = '$tokenLogin'");
+
+        if (!empty($queryToken)) {
+            $checkLogin = true;
+        } else {
+            removeSession('logintoken');
+        }
+    }
+    return $checkLogin;
+}
