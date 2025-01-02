@@ -148,3 +148,54 @@ function isNumberFloat($number)
     $checkNumber = filter_var($number, FILTER_VALIDATE_FLOAT);
     return $checkNumber;
 }
+
+// hàm kiểm tra số điện thoại
+function isPhone($phone)
+{
+    // kiểm tra số đầu có phải là số 0
+    $checkZero = false;
+    // ký tự đầu tiên là số 0
+    if ($phone[0] == '0') {
+        $checkZero = true;
+        // xóa phần tử đầu tiên
+        $phone = substr($phone, 1);
+    }
+    // kiểm tra sau số 0 có đủ 9 số
+    $checkNumber = false;
+    // kiểm tra số nguyên và lượng
+    if (isNumberInt($phone) && (strlen($phone) == 9)) {
+        $checkNumber = true;
+    }
+    // trả ra nếu 2 điều kiện trên hợp lệ
+    if ($checkZero && $checkNumber) {
+        return true;
+    }
+    return false;
+}
+
+// hàm thông báo smg lỗi
+function getSmg($smg, $type = 'success')
+{
+    echo '<div class="alert alert-' . $type . ' mx-1">';
+    echo $smg;
+    echo '</div>';
+}
+
+// hàm điều hướng
+function redirect($path = 'index.php')
+{
+    header("Location: $path");
+    exit;
+}
+
+// hàm thông báo lỗi
+function form_error($fileName, $beforeHtml = '', $afterHtml = '', $errors)
+{
+    return (!empty($errors[$fileName])) ? '<span class="error">' . reset($errors[$fileName]) . '</span>' : null;
+}
+
+// hàm hiển thị dl cũ khi nhập trong input
+function oldData($fileName, $old_data = '', $default = null)
+{
+    return (!empty($old_data[$fileName])) ? $old_data[$fileName] : $default;
+}

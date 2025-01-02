@@ -3,6 +3,7 @@
   --secondary-color: #a47171;
   --text-color: #333333;
   --background-color: #f9f9f9;
+  --error-color: rgb(219, 60, 60);
 }
 
 body {
@@ -24,3 +25,7 @@ body {
   background-color: var(--secondary-color);
 }
 
+.error {
+  color: var(--error-color);
+  font-size: 90%;
+}
