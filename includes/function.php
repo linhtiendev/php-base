@@ -61,12 +61,25 @@ function sendMail($to, $subject, $content)
         $mail->addAddress($to);     //Add a recipient
 
         //Content
+        $mail->CharSet = "UTF-8";
         $mail->isHTML(true);                                  //Set email format to HTML
         $mail->Subject = $subject;
         $mail->Body    = $content;
 
-        $mail->send();
-        echo 'Gửi thành công';
+        // PHP mailer SSL certificate verify failed
+        $mail->SMTPOptions = array(
+            'ssl' => array(
+                'verify_peer' => false,
+                'verify_peer_name' => false,
+                'allow_self_signed' => true
+            )
+        );
+
+        $sendMail = $mail->send();
+        if ($sendMail) {
+            return $sendMail;
+        }
+        // echo 'Gửi thành công';
     } catch (Exception $e) {
         echo "Gửi mail không thành công. Mailer Error: {$mail->ErrorInfo}";
     }
